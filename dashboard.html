@@ -276,8 +276,6 @@
             isHidden = !isHidden;
         });
     }
-
-    // --- POPUP NOTIFICATIONS ---
     function showWelcomePopup() {
         Swal.fire({
             title: 'Welcome to Glamour Elite!',
@@ -296,11 +294,10 @@
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                window.open('https://t.me/Bosscoachpretty1', '_blank');
+                window.open('https://t.me/glamourdigitals', '_blank');
             }
         });
     }
-
     function initAlerts() {
         document.querySelectorAll('.link-alert').forEach(item => {
             item.addEventListener('click', (e) => {
@@ -325,12 +322,10 @@
             });
         });
     }
-
     window.onload = function() {
         updateDashboard();
         initEarningsCard();
         initAlerts();
-        // Delay popup slightly for better UX
         setTimeout(showWelcomePopup, 1500);
     };
 </script>
