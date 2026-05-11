@@ -30,7 +30,6 @@
 
         .wrapper { padding: 20px; max-width: 450px; margin: 0 auto; min-height: 100vh; }
 
-        /* --- HEADER & TIMER --- */
         .header-box { text-align: center; margin: 40px 0 30px; }
         .secure-badge {
             background: var(--glam-accent);
@@ -57,7 +56,6 @@
         }
         #countdown { font-weight: 800; color: var(--glam-danger); font-family: monospace; font-size: 16px; }
 
-        /* --- BANKING CARD --- */
         .payment-card {
             background: var(--glam-card);
             border: 1px solid #1a1a1a;
@@ -68,7 +66,6 @@
             position: relative;
         }
 
-        /* Red Warning Ribbon */
         .opay-warning-ribbon {
             background: rgba(255, 77, 77, 0.1);
             border: 1px solid var(--glam-danger);
@@ -108,7 +105,6 @@
         }
         .mini-copy:active { transform: scale(0.9); }
 
-        /* --- BUTTONS --- */
         .btn-submit {
             background: #0088cc; color: #fff; text-decoration: none;
             display: flex; align-items: center; justify-content: center; gap: 12px;
@@ -124,7 +120,6 @@
         }
         .security-footer span { font-size: 12px; color: var(--text-muted); display: block; margin-top: 8px; }
 
-        /* --- NOTIFICATION --- */
         #live-notif {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150%);
             background: rgba(15, 15, 15, 0.9); border: 1px solid #222;
@@ -173,10 +168,9 @@
             <div class="detail-item">
                 <span class="detail-label">Account Number</span>
                 <div class="detail-value">
-    <span class="acc-number" id="accNum">7073734725</span>
-    <input type="text" value="7073734725" id="hiddenAcc" style="position: absolute; left: -9999px;">
-    <button class="mini-copy" onclick="copyAccount()">COPY</button>
-</div>
+                    <span class="acc-number" id="acc-num">7073734725</span>
+                    <button class="mini-copy" onclick="copyValue('7073734725', 'Account Number')">COPY</button>
+                </div>
             </div>
 
             <div class="detail-item">
@@ -196,52 +190,52 @@
         <span><i class="fa fa-lock"></i> Your transaction is encrypted and recorded.</span>
     </div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function copyAccount() {
-        const val = "7073734725";
-        const hiddenInput = document.getElementById('hiddenAcc');
+    // Improved Copy Function for 100% device compatibility
+    function copyValue(val, type) {
+        // Create temporary element
+        const el = document.createElement('textarea');
+        el.value = val;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
         
-        // Success handler
-        const success = () => {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top',
-                showConfirmButton: false,
-                timer: 1500,
-                background: '#111',
-                color: '#fff'
-            });
-            Toast.fire({ icon: 'success', title: 'Account Number Copied' });
-        };
-
-        // Method 1: Modern Clipboard API
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(val).then(success).catch(() => method2());
-        } else {
-            method2();
+        // Select and Copy
+        const selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
+        el.select();
+        el.setSelectionRange(0, 99999); // Vital for mobile
+        
+        try {
+            document.execCommand('copy');
+            showToast(type);
+        } catch (err) {
+            console.error('Copy failed', err);
         }
-
-        // Method 2: Traditional ExecCommand
-        function method2() {
-            hiddenInput.select();
-            hiddenInput.setSelectionRange(0, 99999); // For mobile
-            try {
-                const result = document.execCommand('copy');
-                if (result) success();
-                else method3();
-            } catch (err) {
-                method3();
-            }
-        }
-
-        // Method 3: The "Nuclear" Option (Manual Prompt)
-        function method3() {
-            window.prompt("Copy the account number below:", val);
+        
+        document.body.removeChild(el);
+        if (selected) {
+            document.getSelection().removeAllRanges();
+            document.getSelection().addRange(selected);
         }
     }
 
-    // --- REMAINDER OF YOUR CODE ---
+    function showToast(type) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 1500,
+            background: '#111',
+            color: '#fff'
+        });
+        Toast.fire({
+            icon: 'success',
+            title: `${type} Copied`
+        });
+    }
 
     window.onload = function() {
         setTimeout(() => {
@@ -277,8 +271,10 @@
         notif.classList.add('active');
         setTimeout(() => notif.classList.remove('active'), 4000);
     }
+
     setInterval(triggerNotif, 9000);
-    setTimeout(triggerNotif, 3000); 
+    setTimeout(triggerNotif, 3000);
 </script>
+
 </body>
 </html>
