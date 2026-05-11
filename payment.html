@@ -3,277 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Checkout | Glamour</title>
+    <title>Premium Checkout | Glamour Luxe</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --glam-gold: #dbb445;
-            --glam-dark: #000000;
-            --glam-card: #0a0a0a;
-            --glam-accent: rgba(219, 180, 69, 0.15);
-            --text-muted: #71717a;
-            --glam-danger: #ff4d4d;
+            --primary-gold: #f3c642;
+            --deep-black: #050505;
+            --card-bg: #111111;
+            --accent-glow: rgba(243, 198, 66, 0.1);
+            --danger-red: #ff3b3b;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--glam-dark);
-            background-image: radial-gradient(circle at 50% -20%, #1a160a 0%, #000000 70%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--deep-black);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(243, 198, 66, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(243, 198, 66, 0.05) 0%, transparent 40%);
             color: #ffffff;
             margin: 0;
-            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        .wrapper { padding: 20px; max-width: 450px; margin: 0 auto; min-height: 100vh; }
+        .wrapper { padding: 25px; max-width: 480px; margin: 0 auto; }
 
-        .header-box { text-align: center; margin: 40px 0 30px; }
-        .secure-badge {
-            background: var(--glam-accent);
-            color: var(--glam-gold);
-            font-size: 10px;
-            font-weight: 900;
-            padding: 6px 14px;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: 1px solid rgba(219, 180, 69, 0.2);
+        /* Header Styles */
+        .brand-header { text-align: center; margin-bottom: 30px; }
+        .secure-tag {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--primary-gold);
         }
-        .main-title { font-size: 26px; font-weight: 900; margin-top: 15px; letter-spacing: -1px; }
-        
-        .timer-pill {
-            background: #111;
+
+        /* Countdown Timer */
+        .timer-box {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0;
             border: 1px solid #222;
-            padding: 8px 18px;
-            border-radius: 12px;
+        }
+        #countdown { color: var(--danger-red); font-weight: 800; font-family: monospace; font-size: 18px; }
+
+        /* Main Payment Card */
+        .payment-card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            border: 1px solid #222;
+            padding: 35px 25px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+        }
+
+        /* Value Displays */
+        .price-section { text-align: center; margin-bottom: 35px; }
+        .amount-container {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            margin-top: 20px;
+            background: rgba(243, 198, 66, 0.08);
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+            border: 1px dashed rgba(243, 198, 66, 0.3);
         }
-        #countdown { font-weight: 800; color: var(--glam-danger); font-family: monospace; font-size: 16px; }
+        .price-text { font-size: 38px; font-weight: 800; color: #fff; }
 
-        .payment-card {
-            background: var(--glam-card);
-            border: 1px solid #1a1a1a;
-            border-radius: 28px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-            position: relative;
-        }
+        .info-grid { display: flex; flex-direction: column; gap: 24px; }
+        .info-label { font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: block; }
+        .info-value { font-size: 17px; font-weight: 600; color: #eee; display: flex; justify-content: space-between; align-items: center; }
 
-        .opay-warning-ribbon {
-            background: rgba(255, 77, 77, 0.1);
-            border: 1px solid var(--glam-danger);
-            color: var(--glam-danger);
+        /* Copy Button Styles */
+        .copy-btn {
+            background: var(--primary-gold);
+            color: #000;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 10px;
             font-size: 11px;
             font-weight: 800;
-            text-align: center;
-            padding: 8px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .payment-card::after {
-            content: ''; position: absolute; inset: 0; border-radius: 28px;
-            padding: 1px; background: linear-gradient(135deg, rgba(219,180,69,0.3), transparent, rgba(255,255,255,0.05));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor; mask-composite: exclude;
-        }
-
-        .price-display { text-align: center; padding-bottom: 25px; border-bottom: 1px solid #1a1a1a; margin-bottom: 25px; }
-        .price-label { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
-        .price-value { font-size: 42px; font-weight: 900; color: var(--glam-gold); }
-
-        .bank-details { display: grid; gap: 20px; }
-        .detail-item { position: relative; }
-        .detail-label { font-size: 10px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; display: block; }
-        .detail-value { font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; justify-content: space-between; }
-        
-        .acc-number { font-size: 22px; font-weight: 800; color: #fff; font-family: 'Inter', sans-serif; }
-        
-        .mini-copy {
-            background: #1a1a1a; border: none; color: var(--glam-gold);
-            padding: 8px 12px; border-radius: 10px; font-size: 12px; font-weight: 700;
             transition: 0.2s;
+            cursor: pointer;
         }
-        .mini-copy:active { transform: scale(0.9); }
+        .copy-btn:active { transform: scale(0.92); }
+        .copy-btn i { margin-right: 4px; }
 
-        .btn-submit {
-            background: #0088cc; color: #fff; text-decoration: none;
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            width: 100%; padding: 20px; border-radius: 20px;
-            font-weight: 900; font-size: 15px; margin-bottom: 20px;
-            transition: 0.3s; border: none;
+        .acc-number { font-size: 24px; font-weight: 800; letter-spacing: 1px; color: var(--primary-gold); }
+
+        /* Action Button */
+        .tg-button {
+            background: #24A1DE;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 22px;
+            border-radius: 20px;
+            font-weight: 800;
+            margin-top: 25px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(36, 161, 222, 0.2);
         }
-        .btn-submit:hover { background: #0099e6; transform: translateY(-3px); color: #fff; }
+        .tg-button:hover { background: #2eb2f0; color: white; transform: translateY(-2px); }
 
-        .security-footer {
-            text-align: center; padding: 20px; border-radius: 20px;
-            background: rgba(255,255,255,0.02); border: 1px dashed #222;
+        /* Warning Banner */
+        .warning-banner {
+            background: rgba(255, 59, 59, 0.1);
+            color: var(--danger-red);
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid rgba(255, 59, 59, 0.2);
+            margin-bottom: 25px;
         }
-        .security-footer span { font-size: 12px; color: var(--text-muted); display: block; margin-top: 8px; }
 
-        #live-notif {
+        /* Live Notification */
+        #live-toast {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150%);
-            background: rgba(15, 15, 15, 0.9); border: 1px solid #222;
-            backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 15px;
-            z-index: 1000; width: 90%; max-width: 380px; transition: 0.5s;
+            background: #1a1a1a; border: 1px solid #333; padding: 12px 24px;
+            border-radius: 50px; z-index: 9999; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        #live-notif.active { transform: translateX(-50%) translateY(0); }
+        #live-toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
 
-<div id="live-notif">
-    <div style="display: flex; align-items: center; gap: 12px;">
-        <div style="width: 10px; height: 10px; background: #4bb543; border-radius: 50%; box-shadow: 0 0 10px #4bb543;"></div>
-        <span id="notif-content" style="font-size: 12px; font-weight: 600;"></span>
-    </div>
+<div id="live-toast">
+    <small><i class="fa fa-circle" style="color: #4CAF50; font-size: 8px; margin-right: 8px;"></i> <span id="user-name"></span> completed activation</small>
 </div>
 
 <div class="wrapper">
-    <div class="header-box">
-        <span class="secure-badge"><i class="fa fa-shield"></i> Pci-Dss Compliant</span>
-        <h1 class="main-title">Finalize Activation</h1>
-        
-        <div class="timer-pill">
-            <span style="font-size: 12px; color: var(--text-muted); font-weight: 700;">REQUEST EXPIRES:</span>
-            <span id="countdown">10:00</span>
-        </div>
+    <div class="brand-header">
+        <span class="secure-tag"><i class="fa fa-lock"></i> SECURE ENCRYPTED NODE</span>
+        <h2 style="font-weight: 800; margin-top: 15px;">Finalize Payment</h2>
+    </div>
+
+    <div class="warning-banner">
+        <i class="fa fa-exclamation-triangle"></i> DO NOT USE OPAY APP FOR THIS TRANSFER
     </div>
 
     <div class="payment-card">
-        <div class="opay-warning-ribbon">
-            <i class="fa fa-triangle-exclamation"></i> DO NOT PAY USING OPAY APP
+        <div class="price-section">
+            <span class="info-label">Amount to Send</span>
+            <div class="amount-container">
+                <span class="price-text">₦14,000</span>
+                <button class="copy-btn" onclick="copyAction('14000', 'Amount')"><i class="fa fa-copy"></i> COPY</button>
+            </div>
         </div>
 
-        <div class="price-display">
-            <span class="price-label">Amount Due</span>
-            <div class="price-value">₦14,000</div>
-        </div>
-
-        <div class="bank-details">
-            <div class="detail-item">
-                <span class="detail-label">Bank Name</span>
-                <div class="detail-value">Moniepoint Microfinance Bank</div>
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Receiving Bank</span>
+                <div class="info-value">Moniepoint MFB</div>
             </div>
 
-            <div class="detail-item">
-                <span class="detail-label">Account Number</span>
-                <div class="detail-value">
-                    <span class="acc-number" id="acc-num">7073734725</span>
-                    <button class="mini-copy" onclick="copyValue('7073734725', 'Account Number')">COPY</button>
+            <div class="info-item">
+                <span class="info-label">Account Number</span>
+                <div class="info-value">
+                    <span class="acc-number">7073734725</span>
+                    <button class="copy-btn" onclick="copyAction('7073734725', 'Account Number')"><i class="fa fa-copy"></i> COPY</button>
                 </div>
             </div>
 
-            <div class="detail-item">
-                <span class="detail-label">Beneficiary Name</span>
-                <div class="detail-value" style="color: var(--glam-gold);">
+            <div class="info-item">
+                <span class="info-label">Beneficiary</span>
+                <div class="info-value" style="color: var(--primary-gold);">
                     CHINAZA A. REJOICE <i class="fa fa-check-circle"></i>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="https://t.me/Coachnancy5?text=I%20have%20made%20payment%20for%20Glam-Premium" class="btn-submit">
-        <i class="fa-brands fa-telegram"></i> CONFIRM PAYMENT ON TELEGRAM
+    <div class="timer-box">
+        <span style="font-size: 11px; font-weight: 700; color: #777;">SESSION EXPIRES IN:</span>
+        <span id="countdown">10:00</span>
+    </div>
+
+    <a href="https://t.me/Coachnancy5?text=I%20have%20made%20payment%20for%20Glam-Premium" class="tg-button">
+        <i class="fa-brands fa-telegram"></i> CONFIRM PAYMENT
     </a>
 
-    <div class="security-footer">
-        <span><i class="fa fa-lock"></i> Your transaction is encrypted and recorded.</span>
-    </div>
+    <p style="text-align: center; font-size: 11px; color: #444; margin-top: 30px; letter-spacing: 0.5px;">
+        <i class="fa fa-shield-halved"></i> PCI-DSS COMPLIANT | ENCRYPTED TRANSACTION
+    </p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // Improved Copy Function for 100% device compatibility
-    function copyValue(val, type) {
-        // Create temporary element
-        const el = document.createElement('textarea');
-        el.value = val;
-        el.setAttribute('readonly', '');
-        el.style.position = 'absolute';
-        el.style.left = '-9999px';
-        document.body.appendChild(el);
-        
-        // Select and Copy
-        const selected = document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
-        el.select();
-        el.setSelectionRange(0, 99999); // Vital for mobile
+    // Universal Copy Function
+    function copyAction(text, label) {
+        const input = document.createElement('textarea');
+        input.value = text;
+        document.body.appendChild(input);
+        input.select();
+        input.setSelectionRange(0, 99999);
         
         try {
             document.execCommand('copy');
-            showToast(type);
-        } catch (err) {
-            console.error('Copy failed', err);
-        }
-        
-        document.body.removeChild(el);
-        if (selected) {
-            document.getSelection().removeAllRanges();
-            document.getSelection().addRange(selected);
-        }
-    }
-
-    function showToast(type) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 1500,
-            background: '#111',
-            color: '#fff'
-        });
-        Toast.fire({
-            icon: 'success',
-            title: `${type} Copied`
-        });
-    }
-
-    window.onload = function() {
-        setTimeout(() => {
-            Swal.fire({
-                title: 'IMPORTANT NOTICE!',
-                text: 'Please DO NOT make payments using OPAY. Use other banks to ensure your activation is instant.',
-                icon: 'warning',
-                confirmButtonColor: '#dbb445',
-                confirmButtonText: 'I UNDERSTAND',
-                background: '#0a0a0a',
-                color: '#fff',
-                backdrop: `rgba(0,0,0,0.9)`
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                timer: 2000,
+                background: '#222',
+                color: '#fff'
             });
-        }, 500);
-    };
+            Toast.fire({
+                icon: 'success',
+                title: `${label} copied to clipboard`
+            });
+        } catch (err) {
+            console.error('Copy failed');
+        }
+        document.body.removeChild(input);
+    }
 
+    // Modern Countdown
     let time = 600;
-    const timerEl = document.getElementById('countdown');
     setInterval(() => {
-        let mins = Math.floor(time / 60);
-        let secs = time % 60;
-        timerEl.innerHTML = `${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        const mins = Math.floor(time / 60);
+        const secs = time % 60;
+        document.getElementById('countdown').innerHTML = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         if(time > 0) time--;
     }, 1000);
 
-    const names = ["Emeka V.", "Adebayo R.", "Sarah J.", "Ibrahim U.", "Gift N.", "Chioma A."];
-    const notif = document.getElementById('live-notif');
-    const content = document.getElementById('notif-content');
-
-    function triggerNotif() {
-        const name = names[Math.floor(Math.random() * names.length)];
-        content.innerHTML = `<span style="color:var(--glam-gold)">${name}</span> just completed activation`;
-        notif.classList.add('active');
-        setTimeout(() => notif.classList.remove('active'), 4000);
+    // Dynamic Live Notifications
+    const users = ["Uche K.", "Tobi A.", "Blessing E.", "Musa W.", "Amaka O.", "David S."];
+    function triggerToast() {
+        const toast = document.getElementById('live-toast');
+        const user = users[Math.floor(Math.random() * users.length)];
+        document.getElementById('user-name').innerText = user;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
     }
+    setInterval(triggerToast, 12000);
+    setTimeout(triggerToast, 2000);
 
-    setInterval(triggerNotif, 9000);
-    setTimeout(triggerNotif, 3000);
+    // Initial Warning
+    window.onload = () => {
+        setTimeout(() => {
+            Swal.fire({
+                title: 'STOP!',
+                text: 'DO NOT pay via Opay. Your activation will fail. Use any other bank.',
+                icon: 'error',
+                confirmButtonColor: '#f3c642',
+                confirmButtonText: 'I UNDERSTAND',
+                background: '#111',
+                color: '#fff'
+            });
+        }, 600);
+    };
 </script>
 
 </body>
