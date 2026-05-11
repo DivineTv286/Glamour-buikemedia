@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
     <title>Glamour | Where Creativity Meets Luxury</title>
     <meta name="description" content="Join Glamour to turn your everyday lifestyle into global content and digital assets. The ultimate luxury ecosystem for creators in Africa.">
     <meta name="theme-color" content="#dbb445">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -26,7 +24,6 @@
             --text-gray: #888;
             --font-main: 'Inter', sans-serif;
         }
-
         body {
             font-family: var(--font-main);
             background-color: var(--dark-bg);
@@ -35,8 +32,6 @@
             margin: 0;
             padding: 0;
         }
-
-        /* --- NAVBAR --- */
         .navbar {
             z-index: 1030;
             padding: 1.5rem 0;
@@ -68,8 +63,6 @@
 
         .btn-gold { background: var(--gold); color: #000; }
         .btn-outline { border: 1px solid var(--glass-border); color: #fff; background: var(--glass); }
-
-        /* --- HERO --- */
         #hero-section {
             min-height: 100vh;
             display: flex;
@@ -88,13 +81,10 @@
             border: 1px solid var(--glass-border);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-
-        /* --- SECTIONS --- */
         .section-padding { padding: 100px 0; }
         .glow-text { text-shadow: 0 0 15px var(--gold-glow); }
         .section-title { font-weight: 900; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 40px; }
 
-        /* --- FEATURE CARDS --- */
         .feature-box {
             background: var(--glass);
             border: 1px solid var(--glass-border);
@@ -105,8 +95,6 @@
         }
         .feature-box:hover { transform: translateY(-10px); border-color: var(--gold); background: rgba(219, 180, 69, 0.05); }
         .feature-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
-
-        /* --- PRICING --- */
         .package-card {
             background: #fff;
             color: #000;
@@ -122,7 +110,6 @@
         .benefit-list { list-style: none; padding: 0; text-align: left; margin: 30px 0; }
         .benefit-list li { margin-bottom: 12px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
         .benefit-list li i { color: var(--gold); }
-
         .country-btn {
             padding: 8px 20px !important;
             font-size: 0.75rem !important;
@@ -134,8 +121,6 @@
             color: #000 !important;
             border-color: var(--gold) !important;
         }
-
-        /* --- POPUP & WIDGET --- */
         #popup-container {
             position: fixed; bottom: 20px; left: 20px; background: white; padding: 15px 20px;
             border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-family: sans-serif;
@@ -155,8 +140,6 @@
             border-radius: 20px; position: absolute; bottom: 80px; right: 0;
             display: none; overflow: hidden;
         }
-
-        /* --- FAQ --- */
         .accordion-item { background: var(--glass) !important; border: 1px solid var(--glass-border) !important; border-radius: 15px !important; margin-bottom: 15px; overflow: hidden; }
         .accordion-button { background: transparent !important; color: #fff !important; font-weight: 600; padding: 20px; box-shadow: none !important; border: none; }
         .accordion-button:not(.collapsed) { color: var(--gold) !important; border-bottom: 1px solid var(--glass-border); }
@@ -169,7 +152,6 @@
             .hero-subtitle { text-align: center; margin: 0 auto 30px; }
             .hero-btns { justify-content: center; display: flex; gap: 10px; }
         }
-        /* ── STRIP ── */
 .strip {
   background: var(--gold);
   padding: 14px 40px;
@@ -203,34 +185,30 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-/* Ensure the text and image share space correctly */
 .feature-box.d-md-flex {
-    align-items: stretch; /* Forces image and text to be same height */
+    align-items: stretch; 
 }
-
 @media (min-width: 768px) {
     .loan-img-container {
-        width: 35% !important; /* Forces the image to take 35% of the card */
+        width: 35% !important; 
         height: auto;
     }
     .loan-text-container {
-        width: 65% !important; /* Gives the text 65% of the card */
+        width: 65% !important; 
     }
 }
-
 @media (max-width: 767px) {
     .loan-img-container {
         width: 100% !important;
-        height: 200px !important; /* Standard height on mobile */
+        height: 200px !important; 
     }
 }
-/* High-Visibility Price Badge */
 .badge-price {
     position: absolute;
     top: 15px;
     left: 15px;
-    background: #ffffff; /* White background for maximum contrast */
-    color: #000000;      /* Black text */
+    background: #ffffff;
+    color: #000000;      
     padding: 6px 14px;
     border-radius: 8px;
     font-size: 0.8rem;
@@ -241,12 +219,9 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     border: 1px solid rgba(0,0,0,0.1);
 }
-
-/* Ensure the loan container handles the absolute badge correctly */
 .flex-shrink-0.position-relative {
     position: relative;
 }
-/* Amount next to Icon */
 .badge-amount {
     background: rgba(255, 255, 255, 0.1);
     color: var(--gold);
@@ -256,27 +231,21 @@
     font-weight: 700;
     border: 1px solid var(--gold-glow);
 }
-
-/* Fix icon margin when using flex */
 .feature-icon.mb-0 {
     margin-bottom: 0 !important;
-}/* 1. Continuous Pulse Animation */
+}
 @keyframes pulse-gold {
     0% { box-shadow: 0 0 0 0 rgba(219, 180, 69, 0.7); }
     70% { box-shadow: 0 0 0 15px rgba(219, 180, 69, 0); }
     100% { box-shadow: 0 0 0 0 rgba(219, 180, 69, 0); }
 }
-
 .animate-pulse {
     animation: pulse-gold 2s infinite;
 }
-
-/* 2. Shimmer/Shine Effect on Hover */
 .btn-gold {
     position: relative;
     overflow: hidden;
 }
-
 .btn-gold::after {
     content: '';
     position: absolute;
@@ -288,13 +257,10 @@
     transform: rotate(30deg);
     transition: none;
 }
-
 .btn-gold:hover::after {
     left: 120%;
     transition: all 0.6s f-out;
 }
-
-/* 3. Small scale up on hover */
 .btn-custom:hover {
     transform: scale(1.05) translateY(-2px);
     filter: brightness(1.1);
@@ -302,7 +268,6 @@
     </style>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="logo-area" href="index.html"><span>❀</span> GLAMOUR</a>
@@ -510,7 +475,6 @@
         </div>
     </div>
 </div>
-
                 </div>
             </div>
         </div>
@@ -524,7 +488,6 @@
                         <span class="faq-subtitle">Have Questions?</span>
                         <h2 class="section-title glow-text">Common Inquiries</h2>
                     </div>
-
                     <div class="accordion" id="glamourFAQ" data-aos="fade-up">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
@@ -538,7 +501,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
@@ -551,7 +513,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
@@ -564,7 +525,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
@@ -771,7 +731,6 @@
                 $('#popup-container').removeClass('popup-visible').addClass('popup-hidden');
             }, 5000);
         }
-
         setInterval(showPopup, 12000);
         setTimeout(showPopup, 3000);
     </script>
