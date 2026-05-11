@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Account | Glamour</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --glam-gold: #dbb445;
+            --glam-dark: #000000;
+            --glam-card: #0d0d0d;
+            --glam-glass: rgba(255, 255, 255, 0.03);
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--glam-dark);
+            background: radial-gradient(circle at top center, #1a160a 0%, #000000 80%);
+            color: #ffffff;
+            margin: 0;
+            padding-bottom: 60px;
+        }
+
+        .wrapper { padding: 25px; max-width: 480px; margin: 0 auto; }
+
+        /* --- BRANDING --- */
+        .brand-header { text-align: center; margin: 40px 0 30px; }
+        .brand-header h2 { 
+            font-weight: 900; 
+            letter-spacing: 5px; 
+            font-size: 1.4rem;
+            background: linear-gradient(to right, #fff, var(--glam-gold), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- PREMIUM CARD --- */
+        .plan-card {
+            background: var(--glam-card);
+            border: 1px solid rgba(219, 180, 69, 0.3);
+            border-radius: 30px;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+
+        /* Shine Effect */
+        .plan-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
+            transform: rotate(45deg);
+            animation: shine 6s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .current-badge {
+            position: absolute; top: 0; right: 0;
+            background: var(--glam-gold); color: #000; font-size: 10px;
+            font-weight: 800; padding: 6px 18px; border-bottom-left-radius: 20px; 
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .plan-name { font-size: 13px; font-weight: 700; color: var(--glam-gold); letter-spacing: 2px; text-transform: uppercase; }
+        .plan-price { font-size: 48px; font-weight: 900; margin: 10px 0; letter-spacing: -1px; }
+        .plan-price span { font-size: 18px; color: var(--text-muted); font-weight: 400; }
+        
+        .benefit-list { text-align: left; margin: 30px 0; list-style: none; padding: 0; }
+        .benefit-list li { 
+            font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+            color: #efefef;
+        }
+        .benefit-list li i { color: var(--glam-gold); font-size: 18px; }
+
+        .btn-pay {
+            background: var(--glam-gold); color: #000; border: none;
+            width: 100%; padding: 18px; border-radius: 18px;
+            font-weight: 900; font-size: 16px; text-transform: uppercase;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(219, 180, 69, 0.2);
+            position: relative; z-index: 2;
+        }
+
+        .btn-pay:hover { transform: scale(1.02); box-shadow: 0 15px 30px rgba(219, 180, 69, 0.4); }
+
+        /* --- TRUST BADGES --- */
+        .trust-area {
+            display: flex; justify-content: center; gap: 20px; margin-top: 20px;
+            opacity: 0.6; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* --- FAQ REBRAND --- */
+        .faq-section { margin-top: 50px; }
+        .faq-title { font-size: 14px; font-weight: 800; margin-bottom: 25px; color: #fff; text-align: center; letter-spacing: 1px; }
+        
+        .faq-item {
+            background: rgba(255,255,255,0.02); 
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px; padding: 5px 15px; margin-bottom: 12px;
+            transition: 0.3s;
+        }
+
+        .faq-q-btn {
+            width: 100%; background: none; border: none; color: #fff;
+            text-align: left; font-size: 14px; font-weight: 600; padding: 15px 0;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .faq-q-btn i { font-size: 10px; color: var(--glam-gold); transition: 0.3s; }
+        .faq-q-btn:not(.collapsed) i { transform: rotate(180deg); }
+
+        .faq-a { padding-bottom: 15px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="brand-header">
+        <h2>GLAMOUR</h2>
+    </div>
+
+    <div class="plan-card">
+        <div class="current-badge"><i class="fa fa-star"></i> Recommended</div>
+        <span class="plan-name">Account Activation</span>
+        <div class="plan-price">₦14,000 <span>/ One-time</span></div>
+        
+        <ul class="benefit-list">
+            <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦10,000</b> Welcome Reward</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Unlock Daily Digital Gigs</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Global Asset Monetization</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Priority 5-Min Withdrawals</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Dedicated Growth Coach</span></li>
+        </ul>
+
+        <a href="payment.html" style="text-decoration: none;">
+            <button class="btn-pay">Activate My Account</button>
+        </a>
+
+        <div class="trust-area">
+            <span><i class="fa fa-lock"></i> Encrypted</span>
+            <span><i class="fa fa-bolt"></i> Instant</span>
+            <span><i class="fa fa-shield"></i> Secure</span>
+        </div>
+    </div>
+
+    <div class="faq-section">
+        <h3 class="faq-title">SUPPORT CENTER</h3>
+        
+        <div class="accordion" id="faqAccordion">
+            <div class="faq-item">
+                <button class="faq-q-btn" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
+                    How do I get the Welcome Bonus?
+                    <i class="fa fa-chevron-down"></i>
+                </button>
+                <div id="c1" class="collapse show" data-bs-parent="#faqAccordion">
+                    <div class="faq-a">
+                        Your ₦10,000 reward is automatically unlocked and added to your dashboard the moment your activation fee is confirmed.
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
+                    Why is activation required?
+                    <i class="fa fa-chevron-down"></i>
+                </button>
+                <div id="c2" class="collapse" data-bs-parent="#faqAccordion">
+                    <div class="faq-a">
+                        Activation verifies your identity within the luxury ecosystem and grants you legal access to global creative assets and remote tasks.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
