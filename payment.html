@@ -16,6 +16,7 @@
             --glam-card: #0a0a0a;
             --glam-accent: rgba(219, 180, 69, 0.15);
             --text-muted: #71717a;
+            --glam-danger: #ff4d4d;
         }
 
         body {
@@ -54,7 +55,7 @@
             gap: 10px;
             margin-top: 20px;
         }
-        #countdown { font-weight: 800; color: #ff4d4d; font-family: monospace; font-size: 16px; }
+        #countdown { font-weight: 800; color: var(--glam-danger); font-family: monospace; font-size: 16px; }
 
         /* --- BANKING CARD --- */
         .payment-card {
@@ -65,6 +66,20 @@
             margin-bottom: 25px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.8);
             position: relative;
+        }
+
+        /* Red Warning Ribbon */
+        .opay-warning-ribbon {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid var(--glam-danger);
+            color: var(--glam-danger);
+            font-size: 11px;
+            font-weight: 800;
+            text-align: center;
+            padding: 8px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
         .payment-card::after {
@@ -121,7 +136,6 @@
 </head>
 <body>
 
-<!-- Live Popups -->
 <div id="live-notif">
     <div style="display: flex; align-items: center; gap: 12px;">
         <div style="width: 10px; height: 10px; background: #4bb543; border-radius: 50%; box-shadow: 0 0 10px #4bb543;"></div>
@@ -141,6 +155,10 @@
     </div>
 
     <div class="payment-card">
+        <div class="opay-warning-ribbon">
+            <i class="fa fa-triangle-exclamation"></i> DO NOT PAY USING OPAY APP
+        </div>
+
         <div class="price-display">
             <span class="price-label">Amount Due</span>
             <div class="price-value">₦14,000</div>
@@ -174,15 +192,29 @@
     </a>
 
     <div class="security-footer">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" style="height: 15px; opacity: 0.3; margin: 0 10px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" style="height: 15px; opacity: 0.3; margin: 0 10px;">
         <span><i class="fa fa-lock"></i> Your transaction is encrypted and recorded.</span>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // 1. Sleek Copy Alert
+    // 1. Mandatory Warning Pop-up on Page Load
+    window.onload = function() {
+        setTimeout(() => {
+            Swal.fire({
+                title: 'IMPORTANT NOTICE!',
+                text: 'Please DO NOT make payments using OPAY. Use other banks to ensure your activation is instant.',
+                icon: 'warning',
+                confirmButtonColor: '#dbb445',
+                confirmButtonText: 'I UNDERSTAND',
+                background: '#0a0a0a',
+                color: '#fff',
+                backdrop: `rgba(0,0,0,0.9)`
+            });
+        }, 500);
+    };
+
+    // 2. Sleek Copy Alert
     function copyValue(val, type) {
         navigator.clipboard.writeText(val);
         const Toast = Swal.mixin({
@@ -199,7 +231,7 @@
         });
     }
 
-    // 2. Timer
+    // 3. Timer
     let time = 600;
     const timerEl = document.getElementById('countdown');
     setInterval(() => {
@@ -209,7 +241,7 @@
         if(time > 0) time--;
     }, 1000);
 
-    // 3. Realistic Live Notifications
+    // 4. Realistic Live Notifications
     const names = ["Emeka V.", "Adebayo R.", "Sarah J.", "Ibrahim U.", "Gift N.", "Chioma A."];
     const notif = document.getElementById('live-notif');
     const content = document.getElementById('notif-content');
