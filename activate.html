@@ -84,23 +84,6 @@
             transition: 0.3s;
         }
         .btn-pay:active { transform: scale(0.97); }
-
-        /* --- Live Payout Footer --- */
-        .live-payout {
-            background: #0d0d0d;
-            border: 1px solid #222;
-            border-radius: 18px;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .payout-avatar { font-size: 32px; color: var(--glam-gold); }
-        .payout-content { display: flex; flex-direction: column; }
-        .payout-user { font-size: 13px; font-weight: 700; color: var(--glam-gold); }
-        .payout-text { font-size: 13px; color: #fff; font-weight: 600; }
-        .payout-time { font-size: 11px; color: #555; margin-top: 2px; }
-
     </style>
 </head>
 <body>
@@ -142,18 +125,6 @@
             <button class="btn-pay">PAY & ACTIVATE NOW</button>
         </a>
     </div>
-
-    <div class="live-payout">
-        <div class="payout-avatar">
-            <i class="fa-solid fa-circle-user"></i>
-        </div>
-        <div class="payout-content">
-            <span class="payout-user">Etoo_Fils (Cameroon)</span>
-            <span class="payout-text">withdrew 20,000 XAF</span>
-            <span class="payout-time">2 minutes ago</span>
-        </div>
-    </div>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
