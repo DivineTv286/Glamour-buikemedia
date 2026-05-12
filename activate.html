@@ -14,121 +14,92 @@
             --glam-gold: #dbb445;
             --glam-dark: #000000;
             --glam-card: #0d0d0d;
-            --glam-glass: rgba(255, 255, 255, 0.03);
-            --text-muted: #a0a0a0;
+            --text-muted: #888;
+            --glam-cyan: #26D0CE;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--glam-dark);
-            background: radial-gradient(circle at top center, #1a160a 0%, #000000 80%);
             color: #ffffff;
             margin: 0;
-            padding-bottom: 60px;
+            padding-bottom: 40px;
         }
 
-        .wrapper { padding: 25px; max-width: 480px; margin: 0 auto; }
+        .wrapper { padding: 20px; max-width: 450px; margin: 0 auto; }
 
-        .brand-header { text-align: center; margin: 40px 0 30px; }
-        .brand-header h2 { 
+        /* --- Confirm Details Header --- */
+        .brand-header { text-align: center; margin: 30px 0 20px; }
+        .confirm-title { 
+            color: var(--glam-cyan); 
             font-weight: 900; 
-            letter-spacing: 5px; 
-            font-size: 1.4rem;
-            background: linear-gradient(to right, #fff, var(--glam-gold), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.1rem; 
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
+        .subtitle { font-size: 13px; color: var(--text-muted); font-weight: 500; }
 
-        .plan-card {
-            background: var(--glam-card);
-            border: 1px solid rgba(219, 180, 69, 0.3);
-            border-radius: 30px;
-            padding: 40px 25px;
+        /* --- User Info Card --- */
+        .details-card {
+            background: #0a0a0a;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #1a1a1a;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .detail-row:last-child { margin-bottom: 0; }
+        .detail-label { color: #666; font-size: 14px; font-weight: 600; }
+        .detail-value { color: #fff; font-size: 14px; font-weight: 700; }
+
+        /* --- Premium Package Card --- */
+        .package-card {
+            background: #000;
+            border: 2px solid var(--glam-gold);
+            border-radius: 25px;
+            padding: 35px 25px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            margin-bottom: 25px;
         }
-
-        .plan-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
-            transform: rotate(45deg);
-            animation: shine 6s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        .current-badge {
-            position: absolute; top: 0; right: 0;
-            background: var(--glam-gold); color: #000; font-size: 10px;
-            font-weight: 800; padding: 6px 18px; border-bottom-left-radius: 20px; 
-            text-transform: uppercase; letter-spacing: 1px;
-            z-index: 5;
-        }
-
-        .plan-name { font-size: 13px; font-weight: 700; color: var(--glam-gold); letter-spacing: 2px; text-transform: uppercase; }
-        .plan-price { font-size: 48px; font-weight: 900; margin: 10px 0; letter-spacing: -1px; }
-        .plan-price span { font-size: 18px; color: var(--text-muted); font-weight: 400; }
+        .plan-name { color: var(--glam-gold); font-size: 16px; font-weight: 800; letter-spacing: 1px; }
+        .plan-price { font-size: 44px; font-weight: 900; margin: 15px 0; }
         
-        .benefit-list { text-align: left; margin: 30px 0; list-style: none; padding: 0; }
+        .benefit-list { text-align: left; margin: 25px 0; list-style: none; padding: 0; }
         .benefit-list li { 
-            font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+            font-size: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px;
             color: #efefef;
         }
-        .benefit-list li i { color: var(--glam-gold); font-size: 18px; }
+        .benefit-list li i { color: var(--glam-gold); font-size: 16px; }
+        .benefit-list b { color: #fff; }
 
         .btn-pay {
             background: var(--glam-gold); color: #000; border: none;
-            width: 100%; padding: 18px; border-radius: 18px;
-            font-weight: 900; font-size: 16px; text-transform: uppercase;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 20px rgba(219, 180, 69, 0.2);
-            position: relative; z-index: 2;
+            width: 100%; padding: 20px; border-radius: 18px;
+            font-weight: 900; font-size: 15px; text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: 0.3s;
         }
+        .btn-pay:active { transform: scale(0.97); }
 
-        .btn-pay:hover { transform: scale(1.02); box-shadow: 0 15px 30px rgba(219, 180, 69, 0.4); }
-
-        /* --- TESTIMONIALS --- */
-        .testimonial-section { margin-top: 50px; }
-        .testimonial-card {
-            background: rgba(255,255,255,0.02);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            text-align: center;
+        /* --- Live Payout Footer --- */
+        .live-payout {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 18px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        .user-name { color: var(--glam-gold); font-weight: 700; font-size: 14px; margin-bottom: 5px; display: block; }
-        .user-comment { font-size: 13px; font-style: italic; color: #d0d0d0; }
-
-        /* --- FAQ REBRAND --- */
-        .faq-section { margin-top: 50px; }
-        .faq-title { font-size: 14px; font-weight: 800; margin-bottom: 25px; color: #fff; text-align: center; letter-spacing: 2px; text-transform: uppercase; }
-        
-        .faq-item {
-            background: rgba(255,255,255,0.02); 
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px; padding: 5px 15px; margin-bottom: 12px;
-        }
-
-        .faq-q-btn {
-            width: 100%; background: none; border: none; color: #fff;
-            text-align: left; font-size: 14px; font-weight: 600; padding: 15px 0;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .faq-q-btn i { font-size: 10px; color: var(--glam-gold); transition: 0.3s; }
-        .faq-q-btn:not(.collapsed) i { transform: rotate(180deg); }
-
-        .faq-a { padding-bottom: 15px; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+        .payout-avatar { font-size: 32px; color: var(--glam-gold); }
+        .payout-content { display: flex; flex-direction: column; }
+        .payout-user { font-size: 13px; font-weight: 700; color: var(--glam-gold); }
+        .payout-text { font-size: 13px; color: #fff; font-weight: 600; }
+        .payout-time { font-size: 11px; color: #555; margin-top: 2px; }
 
     </style>
 </head>
@@ -136,120 +107,65 @@
 
 <div class="wrapper">
     <div class="brand-header">
-        <h2>GLAMOUR</h2>
+        <h2 class="confirm-title">CONFIRM DETAILS</h2>
+        <p class="subtitle">Almost there! Review your details before activating your account.</p>
     </div>
 
-    <div class="plan-card">
-        <div class="current-badge"><i class="fa fa-star"></i> Recommended</div>
-        <span class="plan-name">Account Activation</span>
-        <div class="plan-price">₦15,000 <span>/ One-time</span></div>
-        
-        <ul class="benefit-list">
-            <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦10,000</b> Welcome Reward</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Unlock Daily Digital Gigs</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Global Asset Monetization</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Priority 5-Min Withdrawals</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Dedicated Growth Coach</span></li>
-        </ul>
-
-        <a href="payment.html" style="text-decoration: none;">
-            <button class="btn-pay">Activate My Account</button>
-        </a>
-    </div>
-
-    <div class="testimonial-section">
-        <h3 class="faq-title">USER REVIEWS</h3>
-        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="testimonial-card">
-                        <span class="user-name">Chidi K.</span>
-                        <p class="user-comment">"Activated my account and got my bonus instantly. The daily tasks are actually fun!"</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="testimonial-card">
-                        <span class="user-name">Aisha Bello</span>
-                        <p class="user-comment">"The 5-minute withdrawal is no joke. I’ve already made back my activation fee twice over."</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="testimonial-card">
-                        <span class="user-name">Olawale J.</span>
-                        <p class="user-comment">"Finally a platform that delivers. My growth coach has been very helpful with my gigs."</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="testimonial-card">
-                        <span class="user-name">Blessing E.</span>
-                        <p class="user-comment">"The UI is so premium. It feels like a luxury club that actually pays you."</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="testimonial-card">
-                        <span class="user-name">Samuel T.</span>
-                        <p class="user-comment">"Seamless activation. I'm now earning in dollars from the global assets section."</p>
-                    </div>
-                </div>
-            </div>
+    <div class="details-card">
+        <div class="detail-row">
+            <span class="detail-label">Name:</span>
+            <span class="detail-value" id="display-fullname">Loading...</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Username:</span>
+            <span class="detail-value" id="display-username">Loading...</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Country:</span>
+            <span class="detail-value">Nigeria</span>
         </div>
     </div>
 
-    <div class="faq-section">
-        <h3 class="faq-title">FREQUENTLY ASKED</h3>
+    <div class="package-card">
+        <span class="plan-name">GLAM-PREMIUM PACKAGE</span>
+        <div class="plan-price">₦15,000</div>
         
-        <div class="accordion" id="faqAccordion">
-            <div class="faq-item">
-                <button class="faq-q-btn" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
-                    How do I get the Welcome Bonus?
-                    <i class="fa fa-chevron-down"></i>
-                </button>
-                <div id="c1" class="collapse show" data-bs-parent="#faqAccordion">
-                    <div class="faq-a">
-                        Your ₦10,000 reward is automatically unlocked and added to your dashboard the moment your activation fee is confirmed.
-                    </div>
-                </div>
-            </div>
+        <ul class="benefit-list">
+            <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦10,000</b> Welcome Bonus</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Daily Tap & Earn Task Access</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Priority Withdrawal Approval</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Global Remote Gigs Access</span></li>
+            <li><i class="fa-solid fa-circle-check"></i> <span>Total GlamGains: <b>₦24,000/Hr</b></span></li>
+        </ul>
 
-            <div class="faq-item">
-                <button class="faq-q-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
-                    Why is activation required?
-                    <i class="fa fa-chevron-down"></i>
-                </button>
-                <div id="c2" class="collapse" data-bs-parent="#faqAccordion">
-                    <div class="faq-a">
-                        Activation verifies your identity within the luxury ecosystem and ensures all participants are serious about global asset monetization.
-                    </div>
-                </div>
-            </div>
+        <a href="payment.html" style="text-decoration: none;">
+            <button class="btn-pay">PAY & ACTIVATE NOW</button>
+        </a>
+    </div>
 
-            <div class="faq-item">
-                <button class="faq-q-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
-                    When can I withdraw my earnings?
-                    <i class="fa fa-chevron-down"></i>
-                </button>
-                <div id="c3" class="collapse" data-bs-parent="#faqAccordion">
-                    <div class="faq-a">
-                        You can request a withdrawal any time you hit the minimum threshold. Payments are processed via our priority 5-minute system.
-                    </div>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-q-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c4">
-                    Is there a monthly subscription?
-                    <i class="fa fa-chevron-down"></i>
-                </button>
-                <div id="c4" class="collapse" data-bs-parent="#faqAccordion">
-                    <div class="faq-a">
-                        No. The ₦15,000 is a one-time lifetime activation fee. There are no hidden monthly charges.
-                    </div>
-                </div>
-            </div>
+    <div class="live-payout">
+        <div class="payout-avatar">
+            <i class="fa-solid fa-circle-user"></i>
+        </div>
+        <div class="payout-content">
+            <span class="payout-user">Etoo_Fils (Cameroon)</span>
+            <span class="payout-text">withdrew 20,000 XAF</span>
+            <span class="payout-time">2 minutes ago</span>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // This pulls the data you saved in localStorage from the Signup page
+        const fullName = localStorage.getItem('glamour_fullname') || 'User Name';
+        const userName = localStorage.getItem('glamour_username') || '@username';
+
+        // Update the display text on the screen
+        document.getElementById('display-fullname').innerText = fullName;
+        document.getElementById('display-username').innerText = userName.startsWith('@') ? userName : '@' + userName;
+    });
+</script>
+
 </body>
 </html>
