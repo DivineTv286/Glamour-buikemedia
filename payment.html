@@ -204,9 +204,10 @@
         <span style="font-size: 11px; font-weight: 700; color: #777;">SESSION EXPIRES IN:</span>
         <span id="countdown">10:00</span>
     </div>
-<a href="https://t.me/glamourrcoach?text=Hello%20Admin%2C%20I%20have%20just%20made%20a%20payment%20for%20my%20Glamour%20account%20activation.%0A%0A👤%20Username%3A%20....%0A💰%20Amount%3A%20₦14%2C500%0A🌍%20Country%3A%20Nigeria%0A📝%20Narration%3A%20..._GLAM%0A%0APlease%20verify%20and%20activate%20my%20account." class="tg-button">
+<a href="#" id="tg-confirm-btn" class="tg-button">
     <i class="fa-brands fa-telegram"></i> CONFIRM PAYMENT
 </a>
+
 
     <p style="text-align: center; font-size: 11px; color: #444; margin-top: 30px; letter-spacing: 0.5px;">
         <i class="fa fa-shield-halved"></i> PCI-DSS COMPLIANT | ENCRYPTED TRANSACTION
@@ -281,6 +282,33 @@ window.onload = () => {
         });
     }, 600);
 };
+    function updateTelegramLink(username) {
+    const amount = "₦14,500";
+    const country = "Nigeria";
+    const narration = `${username}_GLAM`; // Automatically appends _GLAM to username
+    
+    const message = `Hello Admin, I have just made a payment for my Glamour account activation.
+
+👤 Username: ${username}
+💰 Amount: ${amount}
+🌍 Country: ${country}
+📝 Narration: ${narration}
+
+Please verify and activate my account.`;
+
+    // Encode the message for a URL
+    const encodedMessage = encodeURIComponent(message);
+    const tgLink = `https://t.me/glamourrcoach?text=${encodedMessage}`;
+    
+    // Apply to the button
+    document.getElementById('tg-confirm-btn').href = tgLink;
+}
+
+// Example: If you want to set it to a specific user when the page loads
+// Replace 'Guest' with your actual registration variable
+window.addEventListener('DOMContentLoaded', (event) => {
+    updateTelegramLink('Customer_User'); 
+});
 </script>
 
 </body>
