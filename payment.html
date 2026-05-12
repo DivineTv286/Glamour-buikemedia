@@ -217,75 +217,77 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     // Universal Copy Function
-    function copyAction(text, label) {
-        const input = document.createElement('textarea');
-        input.value = text;
-        document.body.appendChild(input);
-        input.select();
-        input.setSelectionRange(0, 99999);
-        
-        try {
-            document.execCommand('copy');
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top',
-                showConfirmButton: false,
-                timer: 2000,
-                background: '#222',
-                color: '#fff'
-            });
-            Toast.fire({
-                icon: 'success',
-                title: `${label} copied to clipboard`
-            });
-        } catch (err) {
-            console.error('Copy failed');
-        }
-        document.body.removeChild(input);
+function copyAction(text, label) {
+    const input = document.createElement('textarea');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    input.setSelectionRange(0, 99999);
+    
+    try {
+        document.execCommand('copy');
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 2000,
+            background: '#222',
+            color: '#fff'
+        });
+        Toast.fire({
+            icon: 'success',
+            title: `${label} copied to clipboard`
+        });
+    } catch (err) {
+        console.error('Copy failed');
     }
+    document.body.removeChild(input);
+}
 
-    // Modern Countdown
-    let time = 600;
-    setInterval(() => {
-        const mins = Math.floor(time / 60);
-        const secs = time % 60;
-        document.getElementById('countdown').innerHTML = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        if(time > 0) time--;
-    }, 1000);
+// Modern Countdown
+let time = 600;
+setInterval(() => {
+    const mins = Math.floor(time / 60);
+    const secs = time % 60;
+    document.getElementById('countdown').innerHTML = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    if(time > 0) time--;
+}, 1000);
 
-    // Dynamic Live Notifications
-    const users = ["Uche K.", "Tobi A.", "Blessing E.", "Musa W.", "Amaka O.", "David S."];
-    function triggerToast() {
-        const toast = document.getElementById('live-toast');
-        const user = users[Math.floor(Math.random() * users.length)];
-        document.getElementById('user-name').innerText = user;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-    }
-    setInterval(triggerToast, 12000);
-    setTimeout(triggerToast, 2000);
+// Dynamic Live Notifications
+const users = ["Uche K.", "Tobi A.", "Blessing E.", "Musa W.", "Amaka O.", "David S."];
+function triggerToast() {
+    const toast = document.getElementById('live-toast');
+    const user = users[Math.floor(Math.random() * users.length)];
+    document.getElementById('user-name').innerText = user;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+}
+setInterval(triggerToast, 12000);
+setTimeout(triggerToast, 2000);
 
-    // Initial Warning Pop-up
+// Initial Warning Pop-up
 window.onload = () => {
     setTimeout(() => {
         Swal.fire({
-            title: ' PAYMENT NOTICE:',
+            title: '⚠️ PAYMENT NOTICE:',
             html: `<div style="text-align: left; font-size: 15px; line-height: 1.5;">
                 Please avoid using OPAY for this transaction, as it may delay confirmation and affect withdrawals. 
                 STREAM supports Palmpay, Moniepoint, POS transfers, and all major banks except OPAY.
             </div>`,
             confirmButtonText: 'Understood',
-            confirmButtonColor: '#ff3b3b', // Matches the "Understood" button style
+            confirmButtonColor: '#ff3b3b', 
             background: '#ffffff',
             color: '#000000',
             allowOutsideClick: false
         });
     }, 600);
 };
-    function updateTelegramLink(username) {
+
+// Function to build the Telegram Message
+function updateTelegramLink(username) {
     const amount = "₦14,500";
     const country = "Nigeria";
-    const narration = `${username}_GLAM`; // Automatically appends _GLAM to username
+    const narration = `${username}_GLAM`; // Auto-appends _GLAM
     
     const message = `Hello Admin, I have just made a payment for my Glamour account activation.
 
@@ -296,18 +298,20 @@ window.onload = () => {
 
 Please verify and activate my account.`;
 
-    // Encode the message for a URL
     const encodedMessage = encodeURIComponent(message);
     const tgLink = `https://t.me/glamourrcoach?text=${encodedMessage}`;
     
-    // Apply to the button
-    document.getElementById('tg-confirm-btn').href = tgLink;
+    // Updates the button link
+    const btn = document.getElementById('tg-confirm-btn');
+    if(btn) btn.href = tgLink;
 }
 
-// Example: If you want to set it to a specific user when the page loads
-// Replace 'Guest' with your actual registration variable
+// Logic to grab the username from Sign-up memory
 window.addEventListener('DOMContentLoaded', (event) => {
-    updateTelegramLink('glamour_username); 
+    // Looks for the key 'glamour_username' saved in signup.html
+    const registeredName = localStorage.getItem('glamour_username') || 'Guest';
+    
+    updateTelegramLink(registeredName); 
 });
 </script>
 
