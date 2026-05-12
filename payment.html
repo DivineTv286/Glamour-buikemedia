@@ -204,10 +204,9 @@
         <span style="font-size: 11px; font-weight: 700; color: #777;">SESSION EXPIRES IN:</span>
         <span id="countdown">10:00</span>
     </div>
-
-    <a href="https://t.me/glamourrcoach?text=I%20have%20made%20payment%20for%20Glam-Premium" class="tg-button">
-        <i class="fa-brands fa-telegram"></i> CONFIRM PAYMENT
-    </a>
+<a href="https://t.me/glamourrcoach?text=Hello%20Admin%2C%20I%20have%20just%20made%20a%20payment%20for%20my%20Glamour%20account%20activation.%0A%0A👤%20Username%3A%20....%0A💰%20Amount%3A%20₦14%2C500%0A🌍%20Country%3A%20Nigeria%0A📝%20Narration%3A%20..._GLAM%0A%0APlease%20verify%20and%20activate%20my%20account." class="tg-button">
+    <i class="fa-brands fa-telegram"></i> CONFIRM PAYMENT
+</a>
 
     <p style="text-align: center; font-size: 11px; color: #444; margin-top: 30px; letter-spacing: 0.5px;">
         <i class="fa fa-shield-halved"></i> PCI-DSS COMPLIANT | ENCRYPTED TRANSACTION
@@ -265,20 +264,23 @@
     setInterval(triggerToast, 12000);
     setTimeout(triggerToast, 2000);
 
-    // Initial Warning
-    window.onload = () => {
-        setTimeout(() => {
-            Swal.fire({
-                title: 'STOP!',
-                text: 'DO NOT pay via Opay. Your activation will fail. Use any other bank.',
-                icon: 'error',
-                confirmButtonColor: '#f3c642',
-                confirmButtonText: 'I UNDERSTAND',
-                background: '#111',
-                color: '#fff'
-            });
-        }, 600);
-    };
+    // Initial Warning Pop-up
+window.onload = () => {
+    setTimeout(() => {
+        Swal.fire({
+            title: '⚠️ PAYMENT NOTICE:',
+            html: `<div style="text-align: left; font-size: 15px; line-height: 1.5;">
+                Please avoid using OPAY for this transaction, as it may delay confirmation and affect withdrawals. 
+                STREAM supports Palmpay, Moniepoint, POS transfers, and all major banks except OPAY.
+            </div>`,
+            confirmButtonText: 'Understood',
+            confirmButtonColor: '#ff3b3b', // Matches the "Understood" button style
+            background: '#ffffff',
+            color: '#000000',
+            allowOutsideClick: false
+        });
+    }, 600);
+};
 </script>
 
 </body>
