@@ -652,6 +652,9 @@
                 </div>
             </div>
         </div>
+          <p class="small" style="color: var(--text-gray);">
+                    Built by <a href="https://raphxsoln.vercel.app" target="_blank" style="color: var(--gold); text-decoration: none; font-weight: 600; transition: 0.3s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">RaphXsoln</a>
+          </p>
     </div>
 </footer>
 
@@ -712,11 +715,21 @@
         function toggleChat() {
             $('#chatBox').fadeToggle(300);
         }
-        const users = [
+                const users = [
             { name: "Emmanuel", city: "Port Harcourt", flag: "🇳🇬" },
             { name: "Blessing", city: "Lagos", flag: "🇳🇬" },
+            { name: "Chisom", city: "Abuja", flag: "🇳🇬" },
             { name: "Kofi", city: "Accra", flag: "🇬🇭" },
-            { name: "Jean", city: "Douala", flag: "🇨🇲" }
+            { name: "Tunde", city: "Ibadan", flag: "🇳🇬" },
+            { name: "Chioma", city: "Enugu", flag: "🇳🇬" },
+            { name: "Amina", city: "Kano", flag: "🇳🇬" },
+            { name: "Ama", city: "Kumasi", flag: "🇬🇭" },
+            { name: "Femi", city: "Abeokuta", flag: "🇳🇬" },
+            { name: "Efe", city: "Warri", flag: "🇳🇬" },
+            { name: "Precious", city: "Benin City", flag: "🇳🇬" },
+            { name: "Kwame", city: "Takoradi", flag: "🇬🇭" },
+            { name: "Somto", city: "Asaba", flag: "🇳🇬" },
+            { name: "Rapheal", city: "Uyo", flag: "🇳🇬" }
         ];
 
         function showPopup() {
@@ -724,7 +737,7 @@
             $('#user-flag').text(user.flag);
             $('#user-name').text(user.name);
             $('#user-location').text(user.city);
-            $('#time-ago').text(Math.floor(Math.random() * 10) + 1 + " mins ago");
+            $('#time-ago').text("Just now");
 
             $('#popup-container').removeClass('popup-hidden').addClass('popup-visible');
             setTimeout(() => {
