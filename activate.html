@@ -128,10 +128,10 @@
     const userName = localStorage.getItem('glamour_username') || '@username';
     
     let rawPlan = localStorage.getItem('glamour_selected_plan') || 'GLAM BASIC';
-    let cleanPlan = "Lite"; // Default fallback
+    let cleanPlan = "GLAM BASIC"; // Default fallback
     
-    if (rawPlan === "GLAM PRIME" || rawPlan === "Euro-Max" || rawPlan === "Max") {
-        cleanPlan = "Max";
+    if (rawPlan === "GLAM PRIME" || rawPlan === "basic" || rawPlan === "prime") {
+        cleanPlan = "prime";
     }
     document.getElementById('display-fullname').innerText = fullName;
     document.getElementById('display-username').innerText = userName.startsWith('@') ? userName : '@' + userName;
