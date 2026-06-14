@@ -110,12 +110,12 @@
         </div>
     </div>
 
-    <div class="package-card">
-        <span class="plan-name" id="plan-title">GLAM PRIME</span>
+   <div class="package-card">
+        <span class="plan-name" id="plan-title">Loading Plan...</span>
         <div class="plan-price" id="plan-cost">₦0</div>
         
         <ul class="benefit-list" id="plan-benefits">
-            </ul>
+        </ul>
 
         <a href="payment.html" style="text-decoration: none;">
             <button class="btn-pay">PAY & ACTIVATE NOW</button>
@@ -123,24 +123,28 @@
     </div>
 </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const fullName = localStorage.getItem('glamour_fullname') || 'User Name';
     const userName = localStorage.getItem('glamour_username') || '@username';
     
     let rawPlan = localStorage.getItem('glamour_selected_plan') || 'GLAM PRIME';
-    let cleanPlan = "GLAM BASIC"; // Default fallback
+    let cleanPlan = "basic"; // Default fallback to basic
     
-    if (rawPlan === "GLAM PRIME" || rawPlan === "basic" || rawPlan === "prime") {
+    // Removed "basic" from checking for the premium tier matching
+    if (rawPlan === "GLAM PRIME" || rawPlan === "prime" || rawPlan === "Max" || rawPlan === "Euro-Max") {
         cleanPlan = "prime";
     }
+    
     document.getElementById('display-fullname').innerText = fullName;
     document.getElementById('display-username').innerText = userName.startsWith('@') ? userName : '@' + userName;
     document.getElementById('display-selected-plan').innerText = rawPlan;
     
+    const planTitle = document.getElementById('plan-title');
     const costElement = document.getElementById('plan-cost');
     const benefitsContainer = document.getElementById('plan-benefits');
 
     if (cleanPlan === "prime") {
+        planTitle.innerText = "GLAM PRIME";
         costElement.innerText = "₦20,000";
         benefitsContainer.innerHTML = `
             <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦20,000</b> Welcome Bonus</span></li>
@@ -150,6 +154,7 @@
             <li><i class="fa-solid fa-circle-check"></i> <span>Total GlamGains: <b>₦24,000/Hr</b></span></li>
         `;
     } else {
+        planTitle.innerText = "GLAM BASIC";
         costElement.innerText = "₦14,500";
         benefitsContainer.innerHTML = `
             <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦10,000</b> Welcome Bonus</span></li>
@@ -159,6 +164,7 @@
             <li><i class="fa-solid fa-circle-check"></i> <span>Total GlamGains: <b>₦12,000/Hr</b></span></li>
         `;
     }
+    
     const payButton = document.querySelector('.btn-pay');
     if (payButton) {
         payButton.addEventListener('click', (e) => {
@@ -167,6 +173,6 @@
         });
     }
 });
-    </script>
+</script>
 </body>
 </html>
