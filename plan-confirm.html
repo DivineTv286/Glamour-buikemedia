@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glamour | Confirm Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
+        body { background-color: #000000; color: #fff; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        
+        .header { text-align: center; margin-bottom: 40px; margin-top: 10px; }
+        .logo-img { width: 120px; height: auto; margin-bottom: 10px; }
+        .brand-name { color: #dbb445; font-size: 22px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
 
+        .main-card { 
+            background: #0d0d0d; 
+            width: 100%; 
+            max-width: 400px; 
+            border-radius: 30px; 
+            padding: 40px 25px; 
+            text-align: center;
+            border: 1px solid #1a1a1a;
+        }
+
+        .title-area { margin-bottom: 30px; }
+        .main-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+        .main-title span { color: #dbb445; }
+        .subtitle { color: #888; font-size: 16px; }
+
+        .plan-box {
+            background: #0a0a0a;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+            transition: 0.3s ease;
+        }
+
+        /* Highlight style for the selected plan using Glamour Gold */
+        .plan-box.selected {
+            border-color: #dbb445;
+            background: #12120f;
+        }
+
+        .current-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #dbb445;
+            color: #000;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 4px 10px;
+            border-radius: 8px;
+            text-transform: uppercase;
+        }
+
+        .plan-name { font-size: 20px; font-weight: 800; margin-bottom: 10px; color: #fff; }
+        .plan-price { font-size: 24px; font-weight: 900; color: #dbb445; margin-bottom: 12px; }
+        .plan-meta { color: #aaa; font-size: 13px; line-height: 1.5; }
+
+        .btn-continue {
+            width: 100%;
+            background: #dbb445;
+            color: #000;
+            border: none;
+            padding: 20px;
+            border-radius: 18px;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(219,180,69,0.1);
+        }
+
+        .dimmed { opacity: 0.4; filter: grayscale(0.5); }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand-name">GLAMOUR</div>
+    </div>
+
+    <div class="main-card">
+        <div class="title-area">
+            <h1 class="main-title">Confirm Your <span>Plan</span></h1>
+            <p class="subtitle">Review your package selection below</p>
+        </div>
+
+        <!-- Glam Basic Plan Tier -->
+        <div id="basic-box" class="plan-box">
+            <div id="basic-badge" class="current-badge" style="display: none;">Selected</div>
+            <h3 class="plan-name">GLAM BASIC</h3>
+            <div class="plan-price">₦14,500</div>
+            <p class="plan-meta">Standard task access • Complete support hub</p>
+        </div>
+
+        <!-- Glam Prime Plan Tier -->
+        <div id="prime-box" class="plan-box">
+            <div id="prime-badge" class="current-badge" style="display: none;">Selected</div>
+            <h3 class="plan-name">GLAM PRIME</h3>
+            <div class="plan-price">₦20,000</div>
+            <p class="plan-meta">Maximum earnings potential • Priority withdrawal processing</p>
+        </div>
+
+        <button class="btn-continue" onclick="proceed()">Continue to Activation</button>
+    </div>
+
+    <script>
+        // Check URL parameter first, or fallback to your localStorage item names
+        const params = new URLSearchParams(window.location.search);
+        let userPlan = params.get('plan') || localStorage.getItem('glamour_selected_plan') || 'GLAM BASIC';
+
+        const basicBox = document.getElementById('basic-box');
+        const primeBox = document.getElementById('prime-box');
+        const basicBadge = document.getElementById('basic-badge');
+        const primeBadge = document.getElementById('prime-badge');
+
+        // Logic adjusted to match any dynamic syntax format sent for Prime
+        if (userPlan === 'GLAM PRIME' || userPlan === 'prime' || userPlan === 'Max' || userPlan === 'Euro-Max') {
+            userPlan = 'Max'; // standardize for continuation routing
+            primeBox.classList.add('selected');
+            primeBadge.style.display = 'block';
+            basicBox.classList.add('dimmed');
+        } else {
+            userPlan = 'Lite'; // standardize for continuation routing
+            basicBox.classList.add('selected');
+            basicBadge.style.display = 'block';
+            primeBox.classList.add('dimmed');
+        }
+
+        function proceed() {
+            // Fixed the string literal concatenation format from original template
+            window.location.href = "payment.html?plan=" + userPlan;
+        }
+    </script>
+</body>
+</html>
