@@ -127,7 +127,7 @@
     const fullName = localStorage.getItem('glamour_fullname') || 'User Name';
     const userName = localStorage.getItem('glamour_username') || '@username';
     
-    let rawPlan = localStorage.getItem('glamour_selected_plan') || 'GLAM BASIC';
+    let rawPlan = localStorage.getItem('glamour_selected_plan') || '';
     let cleanPlan = "GLAM BASIC"; // Default fallback
     
     if (rawPlan === "GLAM PRIME" || rawPlan === "basic" || rawPlan === "prime") {
