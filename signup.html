@@ -80,6 +80,17 @@
                     <input type="password" id="password" name="password" placeholder="........." required>
                 </div>
             </div>
+<div class="input-wrapper">
+    <label for="plan" class="input-label">SELECT PLAN</label>
+    <div class="input-group">
+        <span class="input-icon"><i class="fa-solid fa-gem"></i></span>
+        <select id="plan" name="plan" required>
+            <option value="" disabled selected hidden>Choose your plan</option>
+            <option value="GLAM BASIC">GLAM BASIC</option>
+            <option value="GLAM PRIME">GLAM PRIME</option>
+        </select>
+    </div>
+</div>
 
             <button type="submit" class="gold-submit-btn">
                 Create Account 
@@ -341,6 +352,38 @@ body {
     text-decoration: none;
     font-weight: bold;
 }
+        /* Custom styling for the dropdown wrapper and element */
+.input-group select {
+    flex-grow: 1;
+    padding: 18px 20px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1rem;
+    width: 100%;
+    cursor: pointer;
+    appearance: none; /* Removes default browser styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Adds a sleek dropdown arrow indicator */
+.input-group:has(select)::after {
+    content: '\f107'; /* FontAwesome angle-down icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #666;
+    padding-right: 20px;
+    pointer-events: none;
+}
+
+/* Styling the option elements inside the dropdown panel */
+.input-group select option {
+    background-color: #111;
+    color: #fff;
+    padding: 15px;
+}
     </style>
 
     <script>
@@ -353,22 +396,20 @@ hamburger.addEventListener('click', () => {
     mobileMenu.classList.toggle('open');
     document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
 });
-
-// FORM LOGIC: Save username and redirect
 const signupForm = document.querySelector('.signup-form');
 
 signupForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Stop page from refreshing
+    e.preventDefault(); 
 
-    // Get the values from the inputs
     const usernameInput = document.getElementById('username').value;
     const fullNameInput = document.getElementById('full-name').value;
+    const planInput = document.getElementById('plan').value; // Get selected plan
 
-    // Save to LocalStorage (Browser Memory)
+    
     localStorage.setItem('glamour_username', usernameInput);
     localStorage.setItem('glamour_fullname', fullNameInput);
+    localStorage.setItem('glamour_selected_plan', planInput); 
 
-    // Redirect to Dashboard
     window.location.href = "dashboard.html"; 
 });
 </script>
