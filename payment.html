@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Checkout | Glamour</title>
+    <title>Stream Africa | Secure Payment</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,12 +11,12 @@
     
     <style>
         :root {
-            --primary-gold: #dbb445;
-            --deep-black: #050505;
-            --card-bg: #0d0d0d;
-            --border-color: #1a1a1a;
-            --danger-red: #ff3b3b;
-            --text-muted: #666;
+            --primary-teal: #4fd1c5;
+            --deep-black: #041412;
+            --card-bg: #0a2826;
+            --border-color: rgba(79, 209, 197, 0.15);
+            --danger-red: #f85149;
+            --text-muted: #8faea8;
         }
 
         body {
@@ -30,27 +30,27 @@
         .wrapper { padding: 25px; max-width: 450px; margin: 0 auto; }
 
         .brand-header { text-align: center; margin: 20px 0 25px; }
-        .secure-tag {
-            background: rgba(255,255,255,0.03);
+        .secure-badge {
+            background: rgba(79, 209, 197, 0.08);
             border: 1px solid var(--border-color);
             padding: 6px 16px;
             border-radius: 100px;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 1px;
-            color: var(--primary-gold);
+            color: var(--primary-teal);
             text-transform: uppercase;
         }
 
-        .warning-banner {
-            background: rgba(255, 59, 59, 0.08);
+        .alert-box {
+            background: rgba(248, 81, 73, 0.08);
             color: var(--danger-red);
             padding: 14px;
             border-radius: 16px;
             font-size: 12px;
             font-weight: 700;
             text-align: center;
-            border: 1px solid rgba(255, 59, 59, 0.15);
+            border: 1px solid rgba(248, 81, 73, 0.15);
             margin-bottom: 20px;
         }
 
@@ -67,11 +67,11 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: rgba(219, 180, 69, 0.05);
+            background: rgba(79, 209, 197, 0.05);
             padding: 10px 18px;
             border-radius: 16px;
             margin-top: 8px;
-            border: 1px dashed rgba(219, 180, 69, 0.25);
+            border: 1px dashed rgba(79, 209, 197, 0.25);
         }
         .price-text { font-size: 34px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
 
@@ -80,8 +80,8 @@
         .info-value { font-size: 16px; font-weight: 600; color: #eee; display: flex; justify-content: space-between; align-items: center; }
 
         .copy-btn {
-            background: var(--primary-gold);
-            color: #000;
+            background: var(--primary-teal);
+            color: #041412;
             border: none;
             padding: 5px 12px;
             border-radius: 8px;
@@ -92,10 +92,20 @@
         }
         .copy-btn:active { transform: scale(0.95); }
 
-        .acc-number { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; color: var(--primary-gold); }
+        .acc-number { font-size: 24px; font-weight: 800; letter-spacing: 0.5px; color: var(--primary-teal); }
+
+        .remark-box {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px dashed var(--border-color);
+            border-radius: 14px;
+            padding: 14px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .remark-value { font-size: 18px; font-weight: 800; color: #fff; margin-right: 8px; }
 
         .timer-box {
-            background: #0a0a0a;
+            background: rgba(0,0,0,0.15);
             border-radius: 14px;
             padding: 12px;
             display: flex;
@@ -105,7 +115,7 @@
             margin: 20px 0;
             border: 1px solid var(--border-color);
         }
-        #countdown { color: var(--danger-red); font-weight: 700; font-family: monospace; font-size: 16px; }
+        #timer { color: #fff; font-weight: 700; font-family: monospace; font-size: 16px; }
 
         .tg-button {
             background: #24A1DE;
@@ -124,98 +134,127 @@
         }
         .tg-button:hover { background: #2eb2f0; color: white; }
 
+        /* Custom Modal implementation to avoid raw dependency weights */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
+            display: flex; justify-content: center; align-items: center; z-index: 9999;
+        }
+        .modal-card {
+            background: #111; border: 1px solid var(--border-color);
+            border-radius: 24px; width: 90%; max-width: 400px; padding: 30px 24px; text-align: center;
+        }
+        .modal-btn {
+            background: var(--danger-red); color: white; border: none; padding: 14px;
+            border-radius: 12px; font-weight: 700; width: 100%; transition: opacity 0.2s;
+        }
+        .modal-btn:hover { opacity: 0.9; }
+
         #live-toast {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-150%);
-            background: #0a0a0a; border: 1px solid var(--border-color); padding: 10px 20px;
-            border-radius: 50px; z-index: 9999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #111; border: 1px solid var(--border-color); padding: 10px 22px;
+            border-radius: 50px; z-index: 10000; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: var(--primary-teal); font-weight: 600; font-size: 13px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         #live-toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
 
+<div class="modal-overlay" id="warningModal">
+    <div class="modal-card">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 45px; color: var(--danger-red); margin-bottom: 15px;"></i>
+        <h4 style="font-weight: 800; margin-bottom: 12px; color: var(--danger-red);">PAYMENT WARNING</h4>
+        <p style="font-size: 13px; line-height: 1.6; color: #ccc; margin-bottom: 25px;">
+            <strong>DO NOT USE OPAY FOR THIS TRANSACTON.</strong><br><br>
+            Using Opay may cause extreme downtime delays. We fully support Palmpay, Moniepoint, Paga, POS transfers, and all other commercial banks.
+        </p>
+        <button class="modal-btn" onclick="closeModal()">I UNDERSTAND & PROCEED</button>
+    </div>
+</div>
+
 <div id="live-toast">
-    <small><i class="fa fa-circle" style="color: #4CAF50; font-size: 7px; margin-right: 6px;"></i> <span id="user-name" style="font-weight:700;"></span> completed activation</small>
+    <i class="fa fa-check-circle" style="margin-right: 6px;"></i> <span id="toast-text">Copied to clipboard</span>
 </div>
 
 <div class="wrapper">
     <div class="brand-header">
-        <span class="secure-tag"><i class="fa fa-lock"></i> Secure Gateway</span>
-        <h3 style="font-weight: 800; margin-top: 15px; font-size: 22px;">Finalize Transfer</h3>
+        <span class="secure-badge"><i class="fa fa-lock"></i> Stream Secure Pay</span>
+        <h3 style="font-weight: 800; margin-top: 15px; font-size: 22px;">Final Step</h3>
     </div>
 
-    <div class="warning-banner">
-        <i class="fa fa-exclamation-triangle"></i> ATTENTION: DO NOT USE OPAY FOR THIS TRANSFER
+    <div class="alert-box">
+        <i class="fa-solid fa-circle-exclamation"></i> ATTENTION: DO NOT USE OPAY FOR THIS TRANSFER
     </div>
 
     <div class="payment-card">
         <div class="price-section">
             <span class="info-label">Exact Amount to Send</span>
             <div class="amount-container">
-                <span class="price-text" id="display-amount">₦14,500</span>
-                <button class="copy-btn" id="copy-amount-btn"><i class="fa fa-copy"></i> COPY</button>
+                <span class="price-text">₦12,000</span>
+                <button class="copy-btn" onclick="copyValue('12000', 'Amount')"><i class="fa fa-copy"></i> COPY</button>
             </div>
         </div>
 
         <div class="info-grid">
             <div class="info-item">
                 <span class="info-label">Receiving Bank</span>
-                <div class="info-value">KUDA MFB</div>
+                <div class="info-value">MONIEPOINT MFB</div>
             </div>
 
             <div class="info-item">
                 <span class="info-label">Account Number</span>
                 <div class="info-value">
-                    <span class="acc-number" id="target-account">2078450723</span>
-                    <button class="copy-btn" onclick="copyValue('2078450723', 'Account Number')"><i class="fa fa-copy"></i> COPY</button>
+                    <span class="acc-number" id="target-account">7011460924</span>
+                    <button class="copy-btn" onclick="copyValue('7011460924', 'Account Number')"><i class="fa fa-copy"></i> COPY</button>
                 </div>
             </div>
 
             <div class="info-item">
                 <span class="info-label">Beneficiary Name</span>
-                <div class="info-value" style="color: var(--primary-gold);">
-                    CHIBUIKEM P. UGWUANYI <i class="fa fa-check-circle" style="font-size:14px;"></i>
+                <div class="info-value" style="color: var(--primary-teal);">
+                    CLARA O. AMECHI <i class="fa fa-check-circle" style="font-size:14px;"></i>
                 </div>
+            </div>
+        </div>
+
+        <div class="remark-box">
+            <span class="info-label" style="margin-bottom: 4px;">Required Transfer Remark / Reference</span>
+            <div class="d-flex align-items-center justify-content-center">
+                <span class="remark-value" id="user-display">@Member</span>
+                <button class="btn-copy" onclick="copyRemark()" style="background:none; border:none; color:var(--primary-teal);"><i class="fa-regular fa-copy"></i></button>
             </div>
         </div>
     </div>
 
     <div class="timer-box">
-        <span style="font-size: 11px; font-weight: 600; color: #555; letter-spacing: 0.5px;">EXPIRES IN:</span>
-        <span id="countdown">10:00</span>
+        <span style="font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px;">AWAITING VERIFICATION:</span>
+        <span id="timer">10:00</span>
     </div>
 
-    <a href="#" id="tg-confirm-btn" class="tg-button">
+    <a href="#" id="telegram-link" class="tg-button">
         <i class="fa-brands fa-telegram" style="font-size:18px;"></i> Confirm Payment
     </a>
 
-    <p style="text-align: center; font-size: 11px; color: #333; margin-top: 25px;">
+    <p style="text-align: center; font-size: 11px; color: #233e3a; margin-top: 25px;">
         <i class="fa fa-shield-halved"></i> Secured Activation Node
     </p>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-// Universal Toast Notification
-const triggerAlert = (msg) => {
-    Swal.mixin({
-        toast: true,
-        position: 'top',
-        showConfirmButton: false,
-        timer: 2000,
-        background: '#111',
-        color: '#fff'
-    }).fire({
-        icon: 'success',
-        title: msg
-    });
-};
+// Notification Engine
+function triggerAlert(msg) {
+    const toast = document.getElementById('live-toast');
+    document.getElementById('toast-text').innerText = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+}
 
-// Clipboard System
+// Modern Clipboard Handler
 function copyValue(text, label) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-            triggerAlert(`${label} copied to clipboard`);
+            triggerAlert(`${label} copied!`);
         }).catch(() => fallbackCopy(text, label));
     } else {
         fallbackCopy(text, label);
@@ -229,83 +268,48 @@ function fallbackCopy(text, label) {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-    triggerAlert(`${label} copied to clipboard`);
+    triggerAlert(`${label} copied!`);
 }
 
-// Config Dynamic Plan Routing & Setup
-let numericPrice = 14500;
-let formattedPrice = "₦14,500";
+function copyRemark() {
+    const text = document.getElementById('user-display').innerText;
+    copyValue(text, 'Remark reference');
+}
 
+// App Routing Configurations
 document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const selectedPlan = params.get('plan');
-    const username = localStorage.getItem('glamour_username') || 'Guest';
-
-    if (selectedPlan === 'Max' || selectedPlan === 'prime') {
-        numericPrice = 20000;
-        formattedPrice = "₦20,000";
-    }
-
-    document.getElementById('display-amount').innerText = formattedPrice;
+    const urlParams = new URLSearchParams(window.location.search);
+    const user = urlParams.get('username') || 'Member';
     
-    document.getElementById('copy-amount-btn').onclick = () => {
-        copyValue(numericPrice.toString(), 'Amount');
-    };
+    document.getElementById('user-display').innerText = '@' + user;
 
-    // Build optimized message body for Telegram validation node
-    const message = `Hello Admin, I have just made a payment for my Glamour account activation.
+    // Build functional pre-filled text payload for operators
+    const messageBody = `Hi STREAM_AFRICA, I have completed my transfer execution for STREAM_PASS.
 
-👤 Username: ${username}
-💰 Amount: ${formattedPrice}
-🌍 Country: Nigeria
-📝 Narration: ${username}_GLAM
+👤 Username Reference: @${user}
+💰 Paid: ₦12,000
+🏦 Bank Sent To: Moniepoint MFB
 
-Please verify and activate my account.`;
+Attached below is my clean receipt screenshot for approval verification.`;
 
-    const tgLink = `https://t.me/glamourrcoach?text=${encodeURIComponent(message)}`;
-    const confirmBtn = document.getElementById('tg-confirm-btn');
-    if (confirmBtn) confirmBtn.href = tgLink;
+    document.getElementById('telegram-link').href = `https://t.me/streamofficialadmin?text=${encodeURIComponent(messageBody)}`;
 });
 
-// Countdown System
-let time = 600;
-const timerInterval = setInterval(() => {
-    const mins = Math.floor(time / 60);
-    const secs = time % 60;
-    document.getElementById('countdown').innerHTML = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    if (time > 0) time--;
-    else clearInterval(timerInterval);
-}, 1000);
-
-// Dynamic Toast Notifications
-const users = ["Uche K.", "Tobi A.", "Blessing E.", "Musa W.", "Amaka O.", "David S."];
-function triggerToast() {
-    const toast = document.getElementById('live-toast');
-    const user = users[Math.floor(Math.random() * users.length)];
-    document.getElementById('user-name').innerText = user;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
+// Structural UI Closures
+function closeModal() {
+    document.getElementById('warningModal').style.display = 'none';
 }
-setInterval(triggerToast, 12000);
-setTimeout(triggerToast, 1500);
 
-// Modal Notice
-window.onload = () => {
-    setTimeout(() => {
-        Swal.fire({
-            title: 'PAYMENT NOTICE',
-            html: `<div style="text-align: left; font-size: 14px; line-height: 1.6; color:#333;">
-                Please avoid using <b>OPAY</b> for this transaction to bypass down-time delays. <br><br>
-                Glamour supports Palmpay, Moniepoint, POS transfers, and all other major banks cleanly.
-            </div>`,
-            confirmButtonText: 'Understood',
-            confirmButtonColor: '#dbb445', 
-            background: '#ffffff',
-            color: '#000000',
-            allowOutsideClick: false
-        });
-    }, 500);
-};
+// Countdown Loop Execution
+let time = 600; 
+const timerEl = document.getElementById('timer');
+const clockInterval = setInterval(() => {
+    let mins = Math.floor(time / 60);
+    let secs = time % 60;
+    timerEl.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    if(time > 0) time--;
+    else clearInterval(clockInterval);
+}, 1000);
 </script>
 
 </body>
