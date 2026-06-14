@@ -65,7 +65,7 @@
             text-align: center;
             margin-bottom: 25px;
         }
-        .plan-name { color: var(--glam-gold); font-size: 16px; font-weight: 800; letter-spacing: 1px; }
+        .plan-name { color: var(--glam-gold); font-size: 16px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
         .plan-price { font-size: 44px; font-weight: 900; margin: 15px 0; }
         
         .benefit-list { text-align: left; margin: 25px 0; list-style: none; padding: 0; }
@@ -104,37 +104,65 @@
             <span class="detail-value" id="display-username">Loading...</span>
         </div>
         <div class="detail-row">
+            <span class="detail-label">Selected Plan:</span>
+            <span class="detail-value" id="display-selected-plan" style="color: var(--glam-gold);">Loading...</span>
+        </div>
+        <div class="detail-row">
             <span class="detail-label">Country:</span>
             <span class="detail-value">Nigeria</span>
         </div>
     </div>
 
     <div class="package-card">
-        <span class="plan-name">GLAM-PREMIUM PACKAGE</span>
-        <div class="plan-price">₦14,500</div>
+        <span class="plan-name" id="plan-title">GLAM BASIC</span>
+        <div class="plan-price" id="plan-cost">₦0</div>
         
-        <ul class="benefit-list">
-            <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦10,000</b> Welcome Bonus</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Daily Tap & Earn Task Access</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Priority Withdrawal Approval</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Global Remote Gigs Access</span></li>
-            <li><i class="fa-solid fa-circle-check"></i> <span>Total GlamGains: <b>₦24,000/Hr</b></span></li>
-        </ul>
+        <ul class="benefit-list" id="plan-benefits">
+            </ul>
 
         <a href="payment.html" style="text-decoration: none;">
             <button class="btn-pay">PAY & ACTIVATE NOW</button>
         </a>
     </div>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // This pulls the data you saved in localStorage from the Signup page
+        // 1. Retrieve information from user cache
         const fullName = localStorage.getItem('glamour_fullname') || 'User Name';
         const userName = localStorage.getItem('glamour_username') || '@username';
+        const selectedPlan = localStorage.getItem('glamour_selected_plan') || 'GLAM BASIC';
 
-        // Update the display text on the screen
+        // 2. Map structural text variables into text layers
         document.getElementById('display-fullname').innerText = fullName;
         document.getElementById('display-username').innerText = userName.startsWith('@') ? userName : '@' + userName;
+        document.getElementById('display-selected-plan').innerText = selectedPlan;
+        document.getElementById('plan-title').innerText = selectedPlan;
+
+        // 3. Conditional Layout mapping configuration logic 
+        const costElement = document.getElementById('plan-cost');
+        const benefitsContainer = document.getElementById('plan-benefits');
+
+        if (selectedPlan === "GLAM PRIME") {
+            costElement.innerText = "₦14,500";
+            benefitsContainer.innerHTML = `
+                <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦20,000</b> Welcome Bonus</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Premium Tap & Earn Task Access</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Priority Withdrawal Approval</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Global Remote Gigs Access</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Total GlamGains: <b>₦24,000/Hr</b></span></li>
+            `;
+        } else {
+            // Configuration for GLAM BASIC
+            costElement.innerText = "₦7,500"; // Setting example basic cost tier
+            benefitsContainer.innerHTML = `
+                <li><i class="fa-solid fa-circle-check"></i> <span>Instant <b>₦10,000</b> Welcome Bonus</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Standard Tap & Earn Task Access</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Standard Withdrawal Window</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Community Support Hub Access</span></li>
+                <li><i class="fa-solid fa-circle-check"></i> <span>Total GlamGains: <b>₦12,000/Hr</b></span></li>
+            `;
+        }
     });
 </script>
 
